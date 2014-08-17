@@ -8,7 +8,7 @@
       <property name="hibernate.connection.url" value="jdbc:postgresql://127.0.0.1:5432/UNIBAVEOPENCODE?autoReconnect=true"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
       <!--Atualiza o Banco de Dados-->
-      <!--<property name="hibernate.hbm2ddl.auto" value="update"/>-->
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
       <property name="hibernate.show_sql" value="true" />
       <property name="hibernate.cache.use_second_level_cache" value="true"/>
       <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/>

@@ -6,6 +6,12 @@
 
 package unibaveopencode.gui.panel.screens;
 
+import com.google.zxing.WriterException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import unibaveopencode.util.QrCodeUtil;
+
 /**
  *
  * @author Stéfani
@@ -17,6 +23,12 @@ public class JPImprimeQrCode extends javax.swing.JPanel {
      */
     public JPImprimeQrCode() {
         initComponents();
+        //Exemplo de qr code
+        try {
+            jLabel1.setIcon(new ImageIcon(new QrCodeUtil().gerarQRCode(350, 350, "http://www.vidadesuporte.com.br")));
+        } catch (WriterException ex) {
+            //Tratar exeção
+        }
     }
 
     /**

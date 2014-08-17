@@ -7,7 +7,7 @@ package unibaveopencode.gui.principal;
 
 import javax.swing.JInternalFrame;
 import unibaveopencode.gui.iframe.screens.JIFAutor;
-import unibaveopencode.gui.iframe.screens.JIFCadastroLivro;
+import unibaveopencode.gui.iframe.screens.JIFLivro;
 import unibaveopencode.gui.iframe.screens.JIFClassificacao;
 import unibaveopencode.gui.iframe.screens.JIFConsultaQrCode;
 import unibaveopencode.gui.iframe.screens.JIFEditora;
@@ -178,7 +178,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        addItem(new JIFCadastroLivro());
+        addItem(new JIFLivro(this));
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed

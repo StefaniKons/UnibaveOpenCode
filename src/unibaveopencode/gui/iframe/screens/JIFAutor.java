@@ -59,6 +59,7 @@ public class JIFAutor extends javax.swing.JInternalFrame {
                     em.getTransaction().commit();
                     Messages.getInfoMessage("salvarSucesso", "do autor");
                 } catch (Exception e) {
+                    e.printStackTrace();
                     if (em != null) {
                         em.getTransaction().rollback();
                     }
@@ -84,7 +85,6 @@ public class JIFAutor extends javax.swing.JInternalFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 getPrincipal().addItem(new JIFConsultaAutor(JIFAutor.this));
-                
             }
         });
         
@@ -96,7 +96,6 @@ public class JIFAutor extends javax.swing.JInternalFrame {
             }
         });
     }
-    
     
     private JFPrincipal getPrincipal(){
         return principal;

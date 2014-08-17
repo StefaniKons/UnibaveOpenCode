@@ -7,6 +7,7 @@ package unibaveopencode.gui.panel.components.tables.tablemodel;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import unibaveopencode.util.Messages;
 
 /**
  *
@@ -32,6 +33,10 @@ public abstract class TableModel<T> extends AbstractTableModel {
     }
     @Override
     public int getRowCount() {
+        if(lista == null){
+            Messages.getErrorMessage("[UOC:003] Erro ao obter os dados da tabela. Contate o administrador.", colunas);
+            return -1;
+        }
         return lista.size();
     }
     

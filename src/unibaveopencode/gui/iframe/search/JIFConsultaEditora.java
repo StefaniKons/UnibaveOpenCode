@@ -13,6 +13,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import unibaveopencode.gui.iframe.screens.JIFEditora;
+import unibaveopencode.gui.iframe.screens.JIFLivro;
 import unibaveopencode.gui.panel.components.search.JPEditoraSearch;
 import unibaveopencode.gui.panel.components.tables.tablemodel.EditoraTableModel;
 import unibaveopencode.gui.principal.JFPrincipal;
@@ -33,6 +34,13 @@ public class JIFConsultaEditora extends javax.swing.JInternalFrame {
     private JFPrincipal principal;
     private JPEditoraSearch editoraSearch;
     private List<EditoraVO> lista;
+    private JIFLivro livro;
+
+    public JIFConsultaEditora(JIFLivro livro) {
+        initEditora();
+        this.livro = livro;
+        editoraSearch.jPbotaoConsulta.jbAlterar.setText("Adicionar");
+    }
 
     //Chama a consulta dentro de JIFEditora
     public JIFConsultaEditora(JIFEditora editora) {
@@ -69,23 +77,27 @@ public class JIFConsultaEditora extends javax.swing.JInternalFrame {
             public void actionPerformed(ActionEvent ae) {
                 int selectedRow = editoraSearch.jPtabelaConsulta.jTable.getSelectedRow();
                 if (selectedRow == -1) {
-                    Messages.getInfoMessage("consultaVazia");
+                    Messages.getWarningMessage("consultaVazia");
                     return;
                 }
-                
+
                 Integer codigo = (Integer) editoraSearch.jPtabelaConsulta.jTable.getModel().getValueAt(selectedRow, 0);
                 EditoraVO selectedEditora = null;
-                for(EditoraVO current: getConsulta()){
-                    if(current.getCodEditora()== codigo){
+                for (EditoraVO current : getConsulta()) {
+                    if (current.getCodEditora() == codigo) {
                         selectedEditora = current;
                         break;
                     }
                 }
-                editora.jPCadastroEditora.jtfCodigo.setText(selectedEditora.getCodEditora().toString());
-                editora.jPCadastroEditora.jtfNome.setText(selectedEditora.getNomEditora());
-                if (principal != null) {
-                    principal.removeItem(editora);
-                    principal.addItem(editora);
+                if (livro != null) {
+                    livro.setEditoraConsultada(selectedEditora);
+                } else {
+                    editora.jPCadastroEditora.jtfCodigo.setText(selectedEditora.getCodEditora().toString());
+                    editora.jPCadastroEditora.jtfNome.setText(selectedEditora.getNomEditora());
+                    if (principal != null) {
+                        principal.removeItem(editora);
+                        principal.addItem(editora);
+                    }
                 }
                 dispose();
             }
@@ -143,7 +155,7 @@ public class JIFConsultaEditora extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

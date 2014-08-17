@@ -22,14 +22,14 @@ import unibaveopencode.util.WindowUtil;
  * @author Stéfani
  */
 public class JIFEditora extends javax.swing.JInternalFrame {
-
     private JFPrincipal principal;
-
+    
     /**
      * Creates new form JIFEditora
      *
      * @param principal
      */
+    
     public JIFEditora(JFPrincipal principal) {
         initComponents();
         this.principal = principal;
@@ -72,14 +72,6 @@ public class JIFEditora extends javax.swing.JInternalFrame {
             }
         });
 
-        botoes.jbFechar.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                dispose();
-            }
-        });
-
         jPCadastroEditora.jbConsultaEditora.addActionListener(new ActionListener() {
 
             @Override
@@ -94,6 +86,14 @@ public class JIFEditora extends javax.swing.JInternalFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 new WindowUtil().limpar(JIFEditora.this);
+            }
+        });
+        
+        botoes.jbFechar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                dispose();
             }
         });
     }

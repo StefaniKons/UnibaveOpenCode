@@ -7,12 +7,16 @@ package unibaveopencode.gui.iframe.search;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedHashSet;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import unibaveopencode.gui.iframe.screens.JIFAutor;
+import unibaveopencode.gui.iframe.screens.JIFLivro;
 import unibaveopencode.gui.panel.components.search.JPAutorSearch;
 import unibaveopencode.gui.panel.components.tables.tablemodel.AutorTableModel;
 import unibaveopencode.gui.principal.JFPrincipal;
@@ -33,6 +37,15 @@ public class JIFConsultaAutor extends javax.swing.JInternalFrame {
     private JFPrincipal principal;
     private JPAutorSearch autorSearch;
     private List<AutorVO> lista;
+    private JIFLivro livro;
+
+    public JIFConsultaAutor(JIFLivro livro) {
+        initAutor();
+        this.livro = livro;
+        autorSearch.jPbotaoConsulta.jbAlterar.setText("Adicionar");
+        autorSearch.jPtabelaConsulta.jTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        autorSearch.jPtabelaConsulta.jTable.setRowSelectionAllowed(true);
+    }
 
     //Chama a consulta dentro de JIFAutor
     public JIFConsultaAutor(JIFAutor autor) {
@@ -67,20 +80,34 @@ public class JIFConsultaAutor extends javax.swing.JInternalFrame {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                int selectedRow = autorSearch.jPtabelaConsulta.jTable.getSelectedRow();
-                if (selectedRow == -1) {
-                    Messages.getInfoMessage("consultaVazia");
+                if (livro != null) {
+                    int[] selectedRows = autorSearch.jPtabelaConsulta.jTable.getSelectedRows();
+                    if (selectedRows.length == 0) {
+                        Messages.getWarningMessage("consultaVazia");
+                        return;
+                    }
+                    LinkedHashSet<AutorVO> autores = livro.getAutoresConsultados();
+                    if (autores == null) {
+                        autores = new LinkedHashSet<>();
+                    }
+                    for (int row : selectedRows) {
+                        AutorVO autor = getAutor(row);
+                        if (!autores.add(autor)) {
+                            Messages.getWarningMessage("autorJaAdicionado", autor.getNomAutor());
+                        }
+                    }
+                    livro.setAutoresConsultados(autores);
+                    dispose();
                     return;
                 }
-                
-                Integer codigo = (Integer) autorSearch.jPtabelaConsulta.jTable.getModel().getValueAt(selectedRow, 0);
-                AutorVO selectedAutor = null;
-                for(AutorVO current: getConsulta()){
-                    if(current.getCodAutor() == codigo){
-                        selectedAutor = current;
-                        break;
-                    }
+
+                int selectedRow = autorSearch.jPtabelaConsulta.jTable.getSelectedRow();
+                if (selectedRow == -1) {
+                    Messages.getWarningMessage("consultaVazia");
+                    return;
                 }
+
+                AutorVO selectedAutor = getAutor(selectedRow);
                 autor.jPCadastroAutor.jtfCodigo.setText(selectedAutor.getCodAutor().toString());
                 autor.jPCadastroAutor.jtfNome.setText(selectedAutor.getNomAutor());
                 if (principal != null) {
@@ -142,6 +169,18 @@ public class JIFConsultaAutor extends javax.swing.JInternalFrame {
                 emf.close();
             }
         }
+    }
+
+    public AutorVO getAutor(int row) {
+        Integer codigo = (Integer) autorSearch.jPtabelaConsulta.jTable.getModel().getValueAt(row, 0);
+        AutorVO selectedAutor = null;
+        for (AutorVO current : getConsulta()) {
+            if (current.getCodAutor() == codigo) {
+                selectedAutor = current;
+                break;
+            }
+        }
+        return selectedAutor;
     }
 
     /**
