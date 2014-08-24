@@ -13,7 +13,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import unibaveopencode.gui.iframe.screens.JIFAutor;
 import unibaveopencode.gui.iframe.screens.JIFLivro;

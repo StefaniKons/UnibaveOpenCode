@@ -10,18 +10,18 @@ import java.awt.event.ActionListener;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import unibaveopencode.gui.iframe.screens.impl.AbstractScreen;
 import unibaveopencode.gui.iframe.search.JIFConsultaClassificacao;
 import unibaveopencode.gui.panel.components.buttons.JPBotaoCadastro;
 import unibaveopencode.gui.principal.JFPrincipal;
 import unibaveopencode.util.Messages;
 import unibaveopencode.model.vo.ClassificacaoVO;
-import unibaveopencode.util.WindowUtil;
 
 /**
  *
  * @author Stéfani
  */
-public class JIFClassificacao extends javax.swing.JInternalFrame {
+public class JIFClassificacao extends AbstractScreen {
 
     private JFPrincipal principal;
 
@@ -58,6 +58,7 @@ public class JIFClassificacao extends javax.swing.JInternalFrame {
                     }
                     em.getTransaction().commit();
                     Messages.getInfoMessage("salvarSucesso", "de classificação");
+                    limpar();
                 } catch (Exception e) {
                     if (em != null) {
                         em.getTransaction().rollback();
@@ -87,13 +88,7 @@ public class JIFClassificacao extends javax.swing.JInternalFrame {
             }
         });
 
-        botoes.jbLimpar.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                new WindowUtil().limpar(JIFClassificacao.this);
-            }
-        });
+        botoes.jbLimpar.addActionListener(getLimparActionListener());
     }
 
     private JFPrincipal getPrincipal() {

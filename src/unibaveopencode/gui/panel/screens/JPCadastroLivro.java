@@ -17,6 +17,8 @@ public class JPCadastroLivro extends javax.swing.JPanel {
      */
     public JPCadastroLivro() {
         initComponents();
+        jtfEditora.setFocusable(false);
+        jtfClassificacao.setFocusable(false);
     }
 
     /**
@@ -70,9 +72,13 @@ public class JPCadastroLivro extends javax.swing.JPanel {
 
         jtfTitulo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
+        jtfEditora.setBackground(java.awt.SystemColor.controlHighlight);
         jtfEditora.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtfEditora.setForeground(new java.awt.Color(51, 51, 51));
 
+        jtfClassificacao.setBackground(java.awt.SystemColor.controlHighlight);
         jtfClassificacao.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtfClassificacao.setForeground(new java.awt.Color(51, 51, 51));
 
         jtfNumTombo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 

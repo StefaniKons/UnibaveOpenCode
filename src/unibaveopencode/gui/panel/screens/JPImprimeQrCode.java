@@ -25,7 +25,7 @@ public class JPImprimeQrCode extends javax.swing.JPanel {
         initComponents();
         //Exemplo de qr code
         try {
-            jLabel1.setIcon(new ImageIcon(new QrCodeUtil().gerarQRCode(350, 350, "http://www.vidadesuporte.com.br")));
+            jLabel1.setIcon(new ImageIcon(new QrCodeUtil().gerarQRCode(350, 350, "http://www.google.com")));
         } catch (WriterException ex) {
             //Tratar exeção
         }

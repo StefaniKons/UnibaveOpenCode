@@ -54,9 +54,9 @@ public class JPCadastroClassificacao extends javax.swing.JPanel {
         jLabel4.setText("Código:");
 
         jtfCodigo.setEditable(false);
-        jtfCodigo.setBackground(new java.awt.Color(204, 204, 204));
-        jtfCodigo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jtfCodigo.setForeground(new java.awt.Color(102, 102, 102));
+        jtfCodigo.setBackground(java.awt.SystemColor.controlHighlight);
+        jtfCodigo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtfCodigo.setForeground(new java.awt.Color(51, 51, 51));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -28,19 +28,19 @@ public class JPBotaoCadastro extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jbConsultar = new javax.swing.JButton();
+        jbExcluir = new javax.swing.JButton();
         jbLimpar = new javax.swing.JButton();
         jbFechar = new javax.swing.JButton();
         jbSalvar = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jbConsultar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jbConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unibaveopencode/resource/image/Botao_excluir_icone.png"))); // NOI18N
-        jbConsultar.setText("Excluir");
-        jbConsultar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jbConsultar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        add(jbConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, 40));
+        jbExcluir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unibaveopencode/resource/image/Botao_excluir_icone.png"))); // NOI18N
+        jbExcluir.setText("Excluir");
+        jbExcluir.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jbExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        add(jbExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, 40));
 
         jbLimpar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jbLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unibaveopencode/resource/image/Botao_limpar_icone.png"))); // NOI18N
@@ -66,7 +66,7 @@ public class JPBotaoCadastro extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton jbConsultar;
+    public javax.swing.JButton jbExcluir;
     public javax.swing.JButton jbFechar;
     public javax.swing.JButton jbLimpar;
     public javax.swing.JButton jbSalvar;

@@ -53,9 +53,9 @@ public class JPCadastroEditora extends javax.swing.JPanel {
         jbConsultaEditora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unibaveopencode/resource/image/Botao_consultar_icone_16px.png"))); // NOI18N
 
         jtfCodigo.setEditable(false);
-        jtfCodigo.setBackground(new java.awt.Color(204, 204, 204));
+        jtfCodigo.setBackground(java.awt.SystemColor.controlHighlight);
         jtfCodigo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtfCodigo.setForeground(new java.awt.Color(102, 102, 102));
+        jtfCodigo.setForeground(new java.awt.Color(51, 51, 51));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

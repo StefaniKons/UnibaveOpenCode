@@ -14,6 +14,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import org.jboss.logging.Message;
+import unibaveopencode.gui.iframe.screens.impl.AbstractScreen;
 import unibaveopencode.gui.iframe.search.JIFConsultaAutor;
 import unibaveopencode.gui.iframe.search.JIFConsultaClassificacao;
 import unibaveopencode.gui.iframe.search.JIFConsultaEditora;
@@ -26,13 +28,12 @@ import unibaveopencode.model.vo.ClassificacaoVO;
 import unibaveopencode.model.vo.EditoraVO;
 import unibaveopencode.util.Messages;
 import unibaveopencode.model.vo.LivroVO;
-import unibaveopencode.util.WindowUtil;
 
 /**
  *
  * @author Stéfani
  */
-public class JIFLivro extends javax.swing.JInternalFrame {
+public class JIFLivro extends AbstractScreen {
 
     private JFPrincipal principal;
     private EditoraVO editoraConsultada;
@@ -82,6 +83,10 @@ public class JIFLivro extends javax.swing.JInternalFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 int selectedRow = jPCadastroLivro.jPtabelaAutor.jTable.getSelectedRow();
+                if(selectedRow == -1){
+                    Messages.getWarningMessage("excluirVazio", "um autor");
+                    return;
+                }
                 List<AutorVO> listaAutores = new ArrayList<>();
                 listaAutores.addAll(autoresConsultados);
                 listaAutores.remove(selectedRow);
@@ -120,6 +125,7 @@ public class JIFLivro extends javax.swing.JInternalFrame {
                     }
                     em.getTransaction().commit();
                     Messages.getInfoMessage("salvarSucesso", "do livro");
+                    limpar();
                 } catch (Exception e) {
                     if (em != null) {
                         em.getTransaction().rollback();
@@ -142,13 +148,7 @@ public class JIFLivro extends javax.swing.JInternalFrame {
             }
         });
 
-        botoes.jbLimpar.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                new WindowUtil().limpar(JIFLivro.this);
-            }
-        });
+        botoes.jbLimpar.addActionListener(getLimparActionListener());
 
         botoes.jbFechar.addActionListener(new ActionListener() {
 
@@ -158,6 +158,15 @@ public class JIFLivro extends javax.swing.JInternalFrame {
             }
         });
     }
+
+    @Override
+    protected void limpar() {
+        super.limpar();
+        jPCadastroLivro.jPtabelaAutor.jTable.setModel(new AutorNomeTableModel(new ArrayList<AutorVO>()));
+    }
+
+    
+    
  
     private JFPrincipal getPrincipal() {
         return principal;

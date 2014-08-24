@@ -10,18 +10,18 @@ import java.awt.event.ActionListener;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import unibaveopencode.gui.iframe.screens.impl.AbstractScreen;
 import unibaveopencode.gui.iframe.search.JIFConsultaEditora;
 import unibaveopencode.gui.panel.components.buttons.JPBotaoCadastro;
 import unibaveopencode.gui.principal.JFPrincipal;
 import unibaveopencode.util.Messages;
 import unibaveopencode.model.vo.EditoraVO;
-import unibaveopencode.util.WindowUtil;
 
 /**
  *
  * @author Stéfani
  */
-public class JIFEditora extends javax.swing.JInternalFrame {
+public class JIFEditora extends AbstractScreen{
     private JFPrincipal principal;
     
     /**
@@ -59,6 +59,7 @@ public class JIFEditora extends javax.swing.JInternalFrame {
                     }
                     em.getTransaction().commit();
                     Messages.getInfoMessage("salvarSucesso", "de editora");
+                    limpar();
                 } catch (Exception e) {
                     if (em != null) {
                         em.getTransaction().rollback();
@@ -81,13 +82,7 @@ public class JIFEditora extends javax.swing.JInternalFrame {
             }
         });
 
-        botoes.jbLimpar.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                new WindowUtil().limpar(JIFEditora.this);
-            }
-        });
+        botoes.jbLimpar.addActionListener(getLimparActionListener());
         
         botoes.jbFechar.addActionListener(new ActionListener() {
 
