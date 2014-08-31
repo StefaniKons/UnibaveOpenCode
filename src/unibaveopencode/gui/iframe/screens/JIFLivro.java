@@ -14,7 +14,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import org.jboss.logging.Message;
+import javax.persistence.PersistenceException;
 import unibaveopencode.gui.iframe.screens.impl.AbstractScreen;
 import unibaveopencode.gui.iframe.search.JIFConsultaAutor;
 import unibaveopencode.gui.iframe.search.JIFConsultaClassificacao;
@@ -83,7 +83,7 @@ public class JIFLivro extends AbstractScreen {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 int selectedRow = jPCadastroLivro.jPtabelaAutor.jTable.getSelectedRow();
-                if(selectedRow == -1){
+                if (selectedRow == -1) {
                     Messages.getWarningMessage("excluirVazio", "um autor");
                     return;
                 }
@@ -118,9 +118,9 @@ public class JIFLivro extends AbstractScreen {
                     livro.setEditora(editoraConsultada);
                     livro.setClassificacao(classificacaoConsultada);
                     livro.setDesUrl(jPCadastroLivro.jtfUrl.getText());
-                    if(isAlterar()){
+                    if (isAlterar()) {
                         em.merge(livro);
-                    }else{
+                    } else {
                         em.persist(livro);
                     }
                     em.getTransaction().commit();
@@ -132,6 +132,43 @@ public class JIFLivro extends AbstractScreen {
                     }
                     e.printStackTrace();
                     Messages.getErrorMessage("salvarErro", "do livro", Messages.tratarMsg(e.getMessage()));
+                } finally {
+                    if (emf != null) {
+                        emf.close();
+                    }
+                }
+            }
+        });
+
+        botoes.jbExcluir.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                EntityManagerFactory emf = null;
+                EntityManager em = null;
+
+                try {
+                    emf = Persistence.createEntityManagerFactory("uocPU");
+                    em = emf.createEntityManager();
+                    em.getTransaction().begin();
+                    Long codigo = ("".equals(jPCadastroLivro.jtfNumTombo.getText()) ? null : Long.parseLong(jPCadastroLivro.jtfNumTombo.getText()));
+                    if (codigo != null) {
+                        em.remove(em.getReference(LivroVO.class, codigo));
+                        if (em.getTransaction().isActive()) {
+                            em.getTransaction().commit();
+                        }
+                        Messages.getInfoMessage("excluirSucesso", "do livro");
+                    } else {
+                        Messages.getInfoMessage("excluirVazio", "um livro");
+                    }
+                    limpar();
+                } catch (PersistenceException e) {
+                    Messages.getErrorMessage(e, "excluirErro", "do livro");
+                } catch (Exception e) {
+                    if (em != null && em.getTransaction().isActive()) {
+                        em.getTransaction().rollback();
+                    }
+                    Messages.getErrorMessage("excluirErro", "do livro", Messages.tratarMsg(e.getMessage()));
                 } finally {
                     if (emf != null) {
                         emf.close();
@@ -165,9 +202,6 @@ public class JIFLivro extends AbstractScreen {
         jPCadastroLivro.jPtabelaAutor.jTable.setModel(new AutorNomeTableModel(new ArrayList<AutorVO>()));
     }
 
-    
-    
- 
     private JFPrincipal getPrincipal() {
         return principal;
     }

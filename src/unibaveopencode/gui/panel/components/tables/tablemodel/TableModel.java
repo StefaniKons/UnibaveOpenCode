@@ -34,7 +34,7 @@ public abstract class TableModel<T> extends AbstractTableModel {
     @Override
     public int getRowCount() {
         if(lista == null){
-            Messages.getErrorMessage("[UOC:003] Erro ao obter os dados da tabela. Contate o administrador.", colunas);
+            Messages.getErrorMessage("[UOC:003] Erro ao obter os dados da tabela. Contate o administrador.");
             return -1;
         }
         return lista.size();

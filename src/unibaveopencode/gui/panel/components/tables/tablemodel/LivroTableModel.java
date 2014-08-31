@@ -6,7 +6,6 @@
 package unibaveopencode.gui.panel.components.tables.tablemodel;
 
 import java.util.List;
-import org.hibernate.Hibernate;
 import unibaveopencode.model.vo.AutorVO;
 import unibaveopencode.model.vo.LivroVO;
 
@@ -31,7 +30,6 @@ public class LivroTableModel extends TableModel<LivroVO> {
             case 2:
                 StringBuilder autores = new StringBuilder();
                 for (AutorVO autor : livro.getAutor()) {
-                    System.out.println(autor);
                     if ("".equals(autores.toString())) {
                         autores.append(autor.getNomAutor());
                         continue;

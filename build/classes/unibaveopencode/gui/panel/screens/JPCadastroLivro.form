@@ -204,6 +204,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jtfEditora">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e3" green="e3" id="Realce do Controle" palette="2" red="e3" type="palette"/>
         </Property>

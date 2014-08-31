@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
 import unibaveopencode.gui.iframe.screens.impl.AbstractScreen;
 import unibaveopencode.gui.iframe.search.JIFConsultaClassificacao;
 import unibaveopencode.gui.panel.components.buttons.JPBotaoCadastro;
@@ -64,6 +65,43 @@ public class JIFClassificacao extends AbstractScreen {
                         em.getTransaction().rollback();
                     }
                     Messages.getErrorMessage("salvarErro", "de classificação", Messages.tratarMsg(e.getMessage()));
+                } finally {
+                    if (emf != null) {
+                        emf.close();
+                    }
+                }
+            }
+        });
+        
+        botoes.jbExcluir.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                EntityManagerFactory emf = null;
+                EntityManager em = null;
+
+                try {
+                    emf = Persistence.createEntityManagerFactory("uocPU");
+                    em = emf.createEntityManager();
+                    em.getTransaction().begin();
+                    Integer codigo = ("".equals(jPCadastroClassificacao.jtfCodigo.getText()) ? null : Integer.parseInt(jPCadastroClassificacao.jtfCodigo.getText()));
+                    if (codigo != null) {
+                        em.remove(em.getReference(ClassificacaoVO.class, codigo));
+                        if (em.getTransaction().isActive()) {
+                            em.getTransaction().commit();
+                        }
+                        Messages.getInfoMessage("excluirSucesso", "de classificação");
+                    } else {
+                        Messages.getInfoMessage("excluirVazio", "uma classificação");
+                    }
+                    limpar();
+                } catch (PersistenceException e) {
+                    Messages.getErrorMessage(e, "excluirErro", "de classificação");
+                } catch (Exception e) {
+                    if (em != null && em.getTransaction().isActive()) {
+                        em.getTransaction().rollback();
+                    }
+                    Messages.getErrorMessage("excluirErro", "de classificação", Messages.tratarMsg(e.getMessage()));
                 } finally {
                     if (emf != null) {
                         emf.close();

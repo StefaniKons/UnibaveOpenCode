@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
 import unibaveopencode.gui.iframe.screens.impl.AbstractScreen;
 import unibaveopencode.gui.iframe.search.JIFConsultaEditora;
 import unibaveopencode.gui.panel.components.buttons.JPBotaoCadastro;
@@ -65,6 +66,43 @@ public class JIFEditora extends AbstractScreen{
                         em.getTransaction().rollback();
                     }
                     Messages.getErrorMessage("salvarErro", "de editora", Messages.tratarMsg(e.getMessage()));
+                } finally {
+                    if (emf != null) {
+                        emf.close();
+                    }
+                }
+            }
+        });
+        
+        botoes.jbExcluir.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                EntityManagerFactory emf = null;
+                EntityManager em = null;
+
+                try {
+                    emf = Persistence.createEntityManagerFactory("uocPU");
+                    em = emf.createEntityManager();
+                    em.getTransaction().begin();
+                    Integer codigo = ("".equals(jPCadastroEditora.jtfCodigo.getText()) ? null : Integer.parseInt(jPCadastroEditora.jtfCodigo.getText()));
+                    if (codigo != null) {
+                        em.remove(em.getReference(EditoraVO.class, codigo));
+                        if (em.getTransaction().isActive()) {
+                            em.getTransaction().commit();
+                        }
+                        Messages.getInfoMessage("excluirSucesso", "de editora");
+                    } else {
+                        Messages.getInfoMessage("excluirVazio", "uma editora");
+                    }
+                    limpar();
+                } catch (PersistenceException e) {
+                    Messages.getErrorMessage(e, "excluirErro", "de editora");
+                } catch (Exception e) {
+                    if (em != null && em.getTransaction().isActive()) {
+                        em.getTransaction().rollback();
+                    }
+                    Messages.getErrorMessage("excluirErro", "de editora", Messages.tratarMsg(e.getMessage()));
                 } finally {
                     if (emf != null) {
                         emf.close();

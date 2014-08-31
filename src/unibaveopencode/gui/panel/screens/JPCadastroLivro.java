@@ -72,6 +72,7 @@ public class JPCadastroLivro extends javax.swing.JPanel {
 
         jtfTitulo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
+        jtfEditora.setEditable(false);
         jtfEditora.setBackground(java.awt.SystemColor.controlHighlight);
         jtfEditora.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtfEditora.setForeground(new java.awt.Color(51, 51, 51));
