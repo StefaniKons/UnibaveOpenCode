@@ -17,11 +17,11 @@ import javax.swing.ImageIcon;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import unibaveopencode.gui.iframe.search.JIFConsultaLivro;
-import unibaveopencode.gui.panel.components.tables.internal.JPTabelaQrCode;
 import unibaveopencode.gui.panel.components.tables.tablemodel.QrCodeTableModel;
 import unibaveopencode.gui.principal.JFPrincipal;
 import unibaveopencode.model.vo.LivroVO;
 import unibaveopencode.model.vo.QrCodeVO;
+import unibaveopencode.report.GerarRelatorio;
 import unibaveopencode.util.QrCodeUtil;
 
 /**
@@ -40,12 +40,12 @@ public class JIFImprimeQrCode extends javax.swing.JInternalFrame {
         this.principal = principal;
         initComponents();
         initBotoes();
-         jPImprimeQrCode.jPTabelaQrCode.jTable.addMouseListener(new MouseListener() {
+        jPImprimeQrCode.jPTabelaQrCode.jTable.addMouseListener(new MouseListener() {
 
             @Override
             public void mouseClicked(MouseEvent me) {
                 int selectedRow = jPImprimeQrCode.jPTabelaQrCode.jTable.getSelectedRow();
-                Long numTombo  = (Long) jPImprimeQrCode.jPTabelaQrCode.jTable.getValueAt(selectedRow, 0);
+                Long numTombo = (Long) jPImprimeQrCode.jPTabelaQrCode.jTable.getValueAt(selectedRow, 0);
                 LivroVO livro = new JIFConsultaLivro().getConsultaLivro(LivroVO.FIND_NUM_TOMBO, "numTombo", numTombo);
                 jPImprimeQrCode.jtfNum_tombo.setText(String.valueOf(livro.getNumTombo()));
                 jPImprimeQrCode.jtfTitulo.setText(livro.getNomTitulo());
@@ -97,29 +97,23 @@ public class JIFImprimeQrCode extends javax.swing.JInternalFrame {
                 gerarQrCode();
             }
         });
+
+        jPImprimeQrCode.jPbtGerarQrCode.jbImprimir.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                String relatorio = getClass().getResource("/unibaveopencode/resource/report/ListaDeQrCodes.jasper").getFile().replace("%c3%a9", "é");
+                new GerarRelatorio().gerar(relatorio, qrCodeConsultados);
+            }
+        });
     }
-    
 
     private void gerarQrCode() {
         try {
-            if("".equals(jPImprimeQrCode.jtfUrl.getText())){
+            if ("".equals(jPImprimeQrCode.jtfUrl.getText())) {
                 return;
             }
-            //TODO teste
             jPImprimeQrCode.jlQrCode.setIcon(new ImageIcon(new QrCodeUtil().gerarQRCode(350, 350, jPImprimeQrCode.jtfUrl.getText())));
-//            List<QrCode> listaDeQrCodes = new ArrayList<>();
-//            listaDeQrCodes.add(QrCodeVO.builder().nomTitulo(jPImprimeQrCode.jtfTitulo.getText()).numTombo(Long.parseLong(jPImprimeQrCode.jtfNum_tombo.getText()+"1")).qrCode(new QrCodeUtil().gerarQRCode(350, 350, jPImprimeQrCode.jtfUrl.getText())).build());
-//            listaDeQrCodes.add(QrCodeVO.builder().nomTitulo(jPImprimeQrCode.jtfTitulo.getText()).numTombo(Long.parseLong(jPImprimeQrCode.jtfNum_tombo.getText()+"2")).qrCode(new QrCodeUtil().gerarQRCode(350, 350, jPImprimeQrCode.jtfUrl.getText())).build());
-//            listaDeQrCodes.add(QrCodeVO.builder().nomTitulo(jPImprimeQrCode.jtfTitulo.getText()).numTombo(Long.parseLong(jPImprimeQrCode.jtfNum_tombo.getText()+"3")).qrCode(new QrCodeUtil().gerarQRCode(350, 350, jPImprimeQrCode.jtfUrl.getText())).build());
-//            listaDeQrCodes.add(QrCodeVO.builder().nomTitulo(jPImprimeQrCode.jtfTitulo.getText()).numTombo(Long.parseLong(jPImprimeQrCode.jtfNum_tombo.getText()+"4")).qrCode(new QrCodeUtil().gerarQRCode(350, 350, jPImprimeQrCode.jtfUrl.getText())).build());
-//            listaDeQrCodes.add(QrCodeVO.builder().nomTitulo(jPImprimeQrCode.jtfTitulo.getText()).numTombo(Long.parseLong(jPImprimeQrCode.jtfNum_tombo.getText()+"5")).qrCode(new QrCodeUtil().gerarQRCode(350, 350, jPImprimeQrCode.jtfUrl.getText())).build());
-//            listaDeQrCodes.add(QrCodeVO.builder().nomTitulo(jPImprimeQrCode.jtfTitulo.getText()).numTombo(Long.parseLong(jPImprimeQrCode.jtfNum_tombo.getText()+"6")).qrCode(new QrCodeUtil().gerarQRCode(350, 350, jPImprimeQrCode.jtfUrl.getText())).build());
-//            listaDeQrCodes.add(QrCodeVO.builder().nomTitulo(jPImprimeQrCode.jtfTitulo.getText()).numTombo(Long.parseLong(jPImprimeQrCode.jtfNum_tombo.getText()+"7")).qrCode(new QrCodeUtil().gerarQRCode(350, 350, jPImprimeQrCode.jtfUrl.getText())).build());
-//            listaDeQrCodes.add(QrCodeVO.builder().nomTitulo(jPImprimeQrCode.jtfTitulo.getText()).numTombo(Long.parseLong(jPImprimeQrCode.jtfNum_tombo.getText()+"8")).qrCode(new QrCodeUtil().gerarQRCode(350, 350, jPImprimeQrCode.jtfUrl.getText())).build());
-//            listaDeQrCodes.add(QrCodeVO.builder().nomTitulo(jPImprimeQrCode.jtfTitulo.getText()).numTombo(Long.parseLong(jPImprimeQrCode.jtfNum_tombo.getText()+"9")).qrCode(new QrCodeUtil().gerarQRCode(350, 350, jPImprimeQrCode.jtfUrl.getText())).build());
-//            listaDeQrCodes.add(QrCodeVO.builder().nomTitulo(jPImprimeQrCode.jtfTitulo.getText()).numTombo(Long.parseLong(jPImprimeQrCode.jtfNum_tombo.getText()+"10")).qrCode(new QrCodeUtil().gerarQRCode(350, 350, jPImprimeQrCode.jtfUrl.getText())).build());
-//            String relatorio = getClass().getResource("/unibaveopencode/resource/report/ListaDeQrCodes.jasper").getFile().replace("%c3%a9", "é");
-//            new GerarRelatorio().gerar(relatorio, listaDeQrCodes);
         } catch (WriterException ex) {
             Logger.getLogger(JIFImprimeQrCode.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -74,7 +74,7 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jPbtGerarQrCode1" min="-2" max="-2" attributes="0"/>
+              <Component id="jPbtGerarQrCode" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -123,7 +123,7 @@
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPbtGerarQrCode1" min="-2" pref="50" max="-2" attributes="0"/>
+              <Component id="jPbtGerarQrCode" min="-2" pref="50" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -140,7 +140,10 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="unibaveopencode.gui.panel.components.buttons.JPBotaoImprimirQrCode" name="jPbtGerarQrCode1">
+    <Component class="unibaveopencode.gui.panel.components.buttons.JPBotaoImprimirQrCode" name="jPbtGerarQrCode">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jlQrCode">
       <Properties>

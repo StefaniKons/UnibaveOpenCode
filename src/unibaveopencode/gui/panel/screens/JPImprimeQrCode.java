@@ -30,7 +30,7 @@ public class JPImprimeQrCode extends javax.swing.JPanel {
     private void initComponents() {
 
         jbConsultaLivro = new javax.swing.JButton();
-        jPbtGerarQrCode1 = new unibaveopencode.gui.panel.components.buttons.JPBotaoImprimirQrCode();
+        jPbtGerarQrCode = new unibaveopencode.gui.panel.components.buttons.JPBotaoImprimirQrCode();
         jlQrCode = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jtfTitulo = new javax.swing.JTextField();
@@ -131,7 +131,7 @@ public class JPImprimeQrCode extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPbtGerarQrCode1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPbtGerarQrCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(136, 136, 136))
         );
         layout.setVerticalGroup(
@@ -170,7 +170,7 @@ public class JPImprimeQrCode extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPbtGerarQrCode1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPbtGerarQrCode, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -184,7 +184,7 @@ public class JPImprimeQrCode extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     public unibaveopencode.gui.panel.components.tables.internal.JPTabelaQrCode jPTabelaQrCode;
-    private unibaveopencode.gui.panel.components.buttons.JPBotaoImprimirQrCode jPbtGerarQrCode1;
+    public unibaveopencode.gui.panel.components.buttons.JPBotaoImprimirQrCode jPbtGerarQrCode;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     public javax.swing.JButton jbConsultaLivro;
