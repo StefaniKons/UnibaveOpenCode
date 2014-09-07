@@ -7,6 +7,8 @@ package unibaveopencode.gui.iframe.screens;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -28,6 +30,7 @@ import unibaveopencode.model.vo.ClassificacaoVO;
 import unibaveopencode.model.vo.EditoraVO;
 import unibaveopencode.util.Messages;
 import unibaveopencode.model.vo.LivroVO;
+import unibaveopencode.util.impl.VerificaNumerosImpl;
 
 /**
  *
@@ -48,6 +51,12 @@ public class JIFLivro extends AbstractScreen {
         initComponents();
         this.principal = principal;
         initBotoes();
+        initListeners();
+    }
+    
+    public void initListeners(){
+        new VerificaNumerosImpl(jPCadastroLivro.jtfNumTombo);
+        new VerificaNumerosImpl((jPCadastroLivro.jtfAno));
     }
 
     public void initBotoes() {

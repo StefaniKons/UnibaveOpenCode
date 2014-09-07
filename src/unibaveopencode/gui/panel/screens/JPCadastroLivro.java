@@ -19,6 +19,7 @@ public class JPCadastroLivro extends javax.swing.JPanel {
         initComponents();
         jtfEditora.setFocusable(false);
         jtfClassificacao.setFocusable(false);
+        jtfUrlSufixo.setFocusable(false);
     }
 
     /**
@@ -50,6 +51,8 @@ public class JPCadastroLivro extends javax.swing.JPanel {
         jbConsultaLivro = new javax.swing.JButton();
         jbConsultaEditora = new javax.swing.JButton();
         jbConsultaClassificacao = new javax.swing.JButton();
+        jtfUrlSufixo = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Nº de Tombo:");
@@ -77,6 +80,7 @@ public class JPCadastroLivro extends javax.swing.JPanel {
         jtfEditora.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtfEditora.setForeground(new java.awt.Color(51, 51, 51));
 
+        jtfClassificacao.setEditable(false);
         jtfClassificacao.setBackground(java.awt.SystemColor.controlHighlight);
         jtfClassificacao.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtfClassificacao.setForeground(new java.awt.Color(51, 51, 51));
@@ -98,6 +102,13 @@ public class JPCadastroLivro extends javax.swing.JPanel {
         jbConsultaEditora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unibaveopencode/resource/image/Botao_consultar_icone_16px.png"))); // NOI18N
 
         jbConsultaClassificacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unibaveopencode/resource/image/Botao_consultar_icone_16px.png"))); // NOI18N
+
+        jtfUrlSufixo.setEditable(false);
+        jtfUrlSufixo.setBackground(java.awt.SystemColor.controlHighlight);
+        jtfUrlSufixo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel1.setText("/");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -139,7 +150,6 @@ public class JPCadastroLivro extends javax.swing.JPanel {
                                 .addComponent(jLabel8))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtfUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jtfClassificacao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
@@ -147,7 +157,13 @@ public class JPCadastroLivro extends javax.swing.JPanel {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jbConsultaEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jbConsultaClassificacao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(jbConsultaClassificacao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jtfUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jtfUrlSufixo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -192,7 +208,9 @@ public class JPCadastroLivro extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(jtfUrlSufixo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPbotaoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(13, Short.MAX_VALUE))
@@ -201,6 +219,7 @@ public class JPCadastroLivro extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -221,5 +240,6 @@ public class JPCadastroLivro extends javax.swing.JPanel {
     public javax.swing.JTextField jtfNumTombo;
     public javax.swing.JTextField jtfTitulo;
     public javax.swing.JTextField jtfUrl;
+    public javax.swing.JTextField jtfUrlSufixo;
     // End of variables declaration//GEN-END:variables
 }

@@ -60,8 +60,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jtfUrl" alignment="0" min="-2" pref="424" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="jtfClassificacao" alignment="0" pref="384" max="32767" attributes="0"/>
                                       <Component id="jtfEditora" alignment="0" max="32767" attributes="0"/>
@@ -71,6 +70,13 @@
                                       <Component id="jbConsultaEditora" min="-2" pref="30" max="-2" attributes="0"/>
                                       <Component id="jbConsultaClassificacao" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="jtfUrl" min="-2" pref="330" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel1" min="-2" pref="5" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jtfUrlSufixo" min="-2" pref="77" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -132,6 +138,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jtfUrl" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfUrlSufixo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPbotaoCadastro" min="-2" max="-2" attributes="0"/>
@@ -221,6 +229,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jtfClassificacao">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e3" green="e3" id="Realce do Controle" palette="2" red="e3" type="palette"/>
         </Property>
@@ -320,6 +329,28 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfUrlSufixo">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="e3" green="e3" id="Realce do Controle" palette="2" red="e3" type="palette"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="/"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
