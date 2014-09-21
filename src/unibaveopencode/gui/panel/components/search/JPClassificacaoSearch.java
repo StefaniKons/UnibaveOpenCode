@@ -21,7 +21,7 @@ public class JPClassificacaoSearch extends JPSearch<ClassificacaoVO> {
      * @param lista
      */
     public JPClassificacaoSearch(List<ClassificacaoVO> lista) {
-       super("Consulta de Classificacao", new ClassificacaoTableModel(lista));
+       super("Consulta de Classificação", new ClassificacaoTableModel(lista));
     }
 
     /**
