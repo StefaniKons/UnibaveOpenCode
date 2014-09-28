@@ -7,8 +7,8 @@ package unibaveopencode.gui.iframe.screens;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -43,6 +43,7 @@ public class JIFLivro extends AbstractScreen {
     private ClassificacaoVO classificacaoConsultada;
     private LinkedHashSet<AutorVO> autoresConsultados;
     private boolean alterar;
+    private static final String URL_DO_REPOSITORIO = "http://192.168.1.4/?bookid=%s";
 
     /**
      * Creates new form JIFLivro
@@ -53,10 +54,22 @@ public class JIFLivro extends AbstractScreen {
         initBotoes();
         initListeners();
     }
-    
-    public void initListeners(){
+
+    public void initListeners() {
         new VerificaNumerosImpl(jPCadastroLivro.jtfNumTombo);
         new VerificaNumerosImpl((jPCadastroLivro.jtfAno));
+        jPCadastroLivro.jtfNumTombo.addFocusListener(new FocusListener() {
+
+            @Override
+            public void focusGained(FocusEvent fe) {
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent fe) {
+                jPCadastroLivro.jtfUrl.setText(String.format(URL_DO_REPOSITORIO, jPCadastroLivro.jtfNumTombo.getText()));
+            }
+        });
     }
 
     public void initBotoes() {

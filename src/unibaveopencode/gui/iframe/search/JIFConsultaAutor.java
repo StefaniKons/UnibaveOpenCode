@@ -22,6 +22,7 @@ import unibaveopencode.gui.principal.JFPrincipal;
 import unibaveopencode.model.vo.AutorVO;
 import unibaveopencode.util.Messages;
 import unibaveopencode.util.WindowUtil;
+import unibaveopencode.util.impl.VerificaNumerosItemImpl;
 
 /**
  *
@@ -37,6 +38,10 @@ public class JIFConsultaAutor extends javax.swing.JInternalFrame {
     private JPAutorSearch autorSearch;
     private List<AutorVO> lista;
     private JIFLivro livro;
+
+    private void initListener() {
+        new VerificaNumerosItemImpl(autorSearch.jtfConsulta, autorSearch.jcbPor, "Código");
+    }
 
     public JIFConsultaAutor(JIFLivro livro) {
         initAutor();
@@ -64,6 +69,7 @@ public class JIFConsultaAutor extends javax.swing.JInternalFrame {
         this.getContentPane().add(autorSearch);
         initComponents();
         initBotoes(autorSearch);
+        initListener();
     }
 
     private void initBotoes(final JPAutorSearch autorSearch) {

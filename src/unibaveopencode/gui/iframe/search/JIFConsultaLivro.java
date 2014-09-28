@@ -28,6 +28,7 @@ import unibaveopencode.model.vo.QrCodeVO;
 import unibaveopencode.util.Messages;
 import unibaveopencode.util.QrCodeUtil;
 import unibaveopencode.util.WindowUtil;
+import unibaveopencode.util.impl.VerificaNumerosItemImpl;
 
 /**
  *
@@ -43,6 +44,10 @@ public class JIFConsultaLivro extends javax.swing.JInternalFrame {
     private JPLivroSearch livroSearch;
     private JIFImprimeQrCode qrCode;
     private List<LivroVO> lista;
+    
+    private void initListener() {
+        new VerificaNumerosItemImpl(livroSearch.jtfConsulta, livroSearch.jcbPor, "Nº Tombo", "Ano");
+    }
 
     //Chama a consulta dentro de JIFLivro
     public JIFConsultaLivro(JIFLivro livro) {
@@ -68,6 +73,7 @@ public class JIFConsultaLivro extends javax.swing.JInternalFrame {
         this.getContentPane().add(livroSearch);
         initComponents();
         initBotoes(livroSearch);
+        initListener();
     }
 
     private void initBotoes(final JPLivroSearch livroSearch) {

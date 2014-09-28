@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package unibaveopencode.gui.panel.screens;
 
 /**
@@ -19,7 +18,7 @@ public class JPCadastroLivro extends javax.swing.JPanel {
         initComponents();
         jtfEditora.setFocusable(false);
         jtfClassificacao.setFocusable(false);
-        jtfUrlSufixo.setFocusable(false);
+        jtfUrl.setFocusable(false);
     }
 
     /**
@@ -51,8 +50,6 @@ public class JPCadastroLivro extends javax.swing.JPanel {
         jbConsultaLivro = new javax.swing.JButton();
         jbConsultaEditora = new javax.swing.JButton();
         jbConsultaClassificacao = new javax.swing.JButton();
-        jtfUrlSufixo = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Nº de Tombo:");
@@ -86,7 +83,14 @@ public class JPCadastroLivro extends javax.swing.JPanel {
         jtfClassificacao.setForeground(new java.awt.Color(51, 51, 51));
 
         jtfNumTombo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtfNumTombo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfNumTomboKeyReleased(evt);
+            }
+        });
 
+        jtfUrl.setEditable(false);
+        jtfUrl.setBackground(java.awt.SystemColor.controlHighlight);
         jtfUrl.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -96,19 +100,17 @@ public class JPCadastroLivro extends javax.swing.JPanel {
         jLabel9.setText("Ano:");
 
         jtfAno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtfAno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfAnoKeyReleased(evt);
+            }
+        });
 
         jbConsultaLivro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unibaveopencode/resource/image/Botao_consultar_icone_16px.png"))); // NOI18N
 
         jbConsultaEditora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unibaveopencode/resource/image/Botao_consultar_icone_16px.png"))); // NOI18N
 
         jbConsultaClassificacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unibaveopencode/resource/image/Botao_consultar_icone_16px.png"))); // NOI18N
-
-        jtfUrlSufixo.setEditable(false);
-        jtfUrlSufixo.setBackground(java.awt.SystemColor.controlHighlight);
-        jtfUrlSufixo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel1.setText("/");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -149,7 +151,7 @@ public class JPCadastroLivro extends javax.swing.JPanel {
                                 .addComponent(jLabel7)
                                 .addComponent(jLabel8))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jtfClassificacao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
@@ -158,12 +160,7 @@ public class JPCadastroLivro extends javax.swing.JPanel {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jbConsultaEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jbConsultaClassificacao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jtfUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jtfUrlSufixo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(jtfUrl)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -208,18 +205,27 @@ public class JPCadastroLivro extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jtfUrlSufixo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPbotaoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(13, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtfAnoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfAnoKeyReleased
+        if (jtfAno.getText().length() > 4) {
+            jtfAno.setText(jtfAno.getText().substring(0, jtfAno.getText().length() - 1));
+        }
+    }//GEN-LAST:event_jtfAnoKeyReleased
+
+    private void jtfNumTomboKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNumTomboKeyReleased
+        if (jtfNumTombo.getText().length() > 7) {
+            jtfNumTombo.setText(jtfNumTombo.getText().substring(0, jtfNumTombo.getText().length() - 1));
+        }
+    }//GEN-LAST:event_jtfNumTomboKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -240,6 +246,5 @@ public class JPCadastroLivro extends javax.swing.JPanel {
     public javax.swing.JTextField jtfNumTombo;
     public javax.swing.JTextField jtfTitulo;
     public javax.swing.JTextField jtfUrl;
-    public javax.swing.JTextField jtfUrlSufixo;
     // End of variables declaration//GEN-END:variables
 }

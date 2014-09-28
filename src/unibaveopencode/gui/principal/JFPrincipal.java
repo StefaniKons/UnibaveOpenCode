@@ -9,12 +9,12 @@ import javax.swing.JInternalFrame;
 import unibaveopencode.gui.iframe.screens.JIFAutor;
 import unibaveopencode.gui.iframe.screens.JIFLivro;
 import unibaveopencode.gui.iframe.screens.JIFClassificacao;
-import unibaveopencode.gui.iframe.screens.JIFConsultaQrCode;
 import unibaveopencode.gui.iframe.screens.JIFEditora;
 import unibaveopencode.gui.iframe.screens.JIFImprimeQrCode;
 import unibaveopencode.gui.iframe.search.JIFConsultaAutor;
 import unibaveopencode.gui.iframe.search.JIFConsultaClassificacao;
 import unibaveopencode.gui.iframe.search.JIFConsultaEditora;
+import unibaveopencode.gui.iframe.search.JIFConsultaLivro;
 import unibaveopencode.util.WindowUtil;
 
 /**
@@ -150,7 +150,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem9);
 
-        jMenuItem3.setText("Consulta de QR Code");
+        jMenuItem3.setText("Consulta de Livro");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -181,10 +181,6 @@ public class JFPrincipal extends javax.swing.JFrame {
         addItem(new JIFLivro(this));
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        addItem(new JIFConsultaQrCode());
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         addItem(new JIFImprimeQrCode(this));
     }//GEN-LAST:event_jMenuItem7ActionPerformed
@@ -200,6 +196,10 @@ public class JFPrincipal extends javax.swing.JFrame {
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         addItem(new JIFConsultaClassificacao(this));
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        addItem(new JIFConsultaLivro(this));
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     public void addItem(JInternalFrame jif) {
         jDesktopPane1.add(jif);

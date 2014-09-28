@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package unibaveopencode.util.impl;
 
 import java.awt.Color;
@@ -13,15 +12,21 @@ import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-
 public class VerificaNumerosImpl implements KeyListener {
-    
+
     private JTextField campoDeTexto;
-    private Border bordaAntiga;
-    public VerificaNumerosImpl(JTextField campoDeTexto){
+    private Border bordaOriginal;
+
+    public VerificaNumerosImpl(JTextField campoDeTexto) {
         this.campoDeTexto = campoDeTexto;
         campoDeTexto.addKeyListener(this);
-        bordaAntiga = campoDeTexto.getBorder();
+        bordaOriginal = campoDeTexto.getBorder();
+    }
+    
+    public void remove(JTextField campoDeTexto) {
+        this.campoDeTexto = campoDeTexto;
+        campoDeTexto.removeKeyListener(this);
+        bordaOriginal = campoDeTexto.getBorder();
     }
 
     @Override
@@ -35,8 +40,11 @@ public class VerificaNumerosImpl implements KeyListener {
     @Override
     public void keyReleased(KeyEvent ke) {
         boolean isDigit = Character.isDigit(ke.getKeyChar());
-        
-        if(!isDigit){
+        if (ke.getKeyCode() == KeyEvent.VK_TAB || ke.getKeyCode() == KeyEvent.VK_ENTER) {
+            return;
+        }
+
+        if (!isDigit) {
             String texto = campoDeTexto.getText().replaceAll("[^\\d.]", "");
             campoDeTexto.setText(texto);
             Border bordaVermelha = BorderFactory.createLineBorder(Color.red);
@@ -44,7 +52,7 @@ public class VerificaNumerosImpl implements KeyListener {
             campoDeTexto.setToolTipText("Este campo aceita somente números.");
             return;
         }
-        campoDeTexto.setBorder(bordaAntiga);
+        campoDeTexto.setBorder(bordaOriginal);
         campoDeTexto.setToolTipText(null);
     }
 }

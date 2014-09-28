@@ -20,6 +20,7 @@ import unibaveopencode.gui.principal.JFPrincipal;
 import unibaveopencode.model.vo.ClassificacaoVO;
 import unibaveopencode.util.Messages;
 import unibaveopencode.util.WindowUtil;
+import unibaveopencode.util.impl.VerificaNumerosItemImpl;
 
 /**
  *
@@ -35,6 +36,10 @@ public class JIFConsultaClassificacao extends javax.swing.JInternalFrame {
     private JPClassificacaoSearch classificacaoSearch;
     private List<ClassificacaoVO> lista;
     private JIFLivro livro;
+    
+    private void initListener() {
+        new VerificaNumerosItemImpl(classificacaoSearch.jtfConsulta, classificacaoSearch.jcbPor, "Código");
+    }
 
     public JIFConsultaClassificacao(JIFLivro livro) {
         initClassificacao();
@@ -60,6 +65,7 @@ public class JIFConsultaClassificacao extends javax.swing.JInternalFrame {
         this.getContentPane().add(classificacaoSearch);
         initComponents();
         initBotoes(classificacaoSearch);
+        initListener();
     }
 
     private void initBotoes(final JPClassificacaoSearch classificacaoSearch) {
