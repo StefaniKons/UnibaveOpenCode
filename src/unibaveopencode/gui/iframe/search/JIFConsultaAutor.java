@@ -129,7 +129,9 @@ public class JIFConsultaAutor extends javax.swing.JInternalFrame {
             public void actionPerformed(ActionEvent ae) {
                 switch (autorSearch.jcbPor.getSelectedIndex()) {
                     case 0:
-                        getConsulta(AutorVO.FIND_COD_AUTOR, "codAutor", Integer.parseInt(autorSearch.jtfConsulta.getText()));
+                        if (!autorSearch.jtfConsulta.getText().equals("")) {
+                            getConsulta(AutorVO.FIND_COD_AUTOR, "codAutor", Integer.parseInt(autorSearch.jtfConsulta.getText()));
+                        }
                         return;
                     case 1:
                         getConsulta(AutorVO.FIND_NOME_AUTOR, "nomAutor", autorSearch.jtfConsulta.getText());

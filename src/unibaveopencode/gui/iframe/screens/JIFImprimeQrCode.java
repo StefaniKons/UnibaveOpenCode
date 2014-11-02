@@ -106,6 +106,14 @@ public class JIFImprimeQrCode extends javax.swing.JInternalFrame {
                 new GerarRelatorio().gerar(relatorio, qrCodeConsultados);
             }
         });
+
+        jPImprimeQrCode.jPbtGerarQrCode.jbFechar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                dispose();
+            }
+        });
     }
 
     private void gerarQrCode() {

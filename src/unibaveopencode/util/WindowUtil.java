@@ -9,6 +9,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.KeyListener;
 import javax.swing.JDesktopPane;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
@@ -52,6 +53,13 @@ public class WindowUtil {
                 (desktopSize.height - jInternalFrameSize.height) / 2);
     }
 
+    public void centralizar(JDesktopPane desktop, JDialog dialog) {
+        Dimension desktopSize = desktop.getSize();
+        Dimension jDialog = dialog.getSize();
+        dialog.setLocation((desktopSize.width - jDialog.width) / 2,
+                (desktopSize.height - jDialog.height) / 2);
+    }
+
     public void reset(JFrame frame) {
         for (java.awt.Component comp : frame.getComponents()) {
             if (comp instanceof JTextField) {
@@ -61,4 +69,3 @@ public class WindowUtil {
 
     }
 }
-

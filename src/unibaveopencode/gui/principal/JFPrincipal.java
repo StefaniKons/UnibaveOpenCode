@@ -207,6 +207,8 @@ public class JFPrincipal extends javax.swing.JFrame {
         new WindowUtil().centralizar(this.jDesktopPane1, jif);
     }
     
+    
+    
     public void removeItem(JInternalFrame jif) {
         jDesktopPane1.remove(jif);
     }
@@ -247,7 +249,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    public javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

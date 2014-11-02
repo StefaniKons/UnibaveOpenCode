@@ -8,6 +8,7 @@ package unibaveopencode.util;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import org.postgresql.util.PSQLException;
@@ -19,8 +20,13 @@ import org.postgresql.util.PSQLException;
 public class Messages {
 
     private static String getMessage(String msg) {
-        ResourceBundle rb = ResourceBundle.getBundle("unibaveopencode.resource.properties.messages");
-        return rb.getString(msg);
+        try {
+            ResourceBundle rb = ResourceBundle.getBundle("unibaveopencode.resource.properties.messages");
+            return rb.getString(msg);
+        } catch (MissingResourceException e) {
+            return msg;
+        }
+
     }
 
     public static void getInfoMessage(String msg, String... parametros) {

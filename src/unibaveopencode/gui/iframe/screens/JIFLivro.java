@@ -17,6 +17,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
+import javax.swing.JDesktopPane;
+import javax.swing.JDialog;
+import unibaveopencode.gui.iframe.components.load.JDCarregando;
 import unibaveopencode.gui.iframe.screens.impl.AbstractScreen;
 import unibaveopencode.gui.iframe.search.JIFConsultaAutor;
 import unibaveopencode.gui.iframe.search.JIFConsultaClassificacao;
@@ -30,6 +34,7 @@ import unibaveopencode.model.vo.ClassificacaoVO;
 import unibaveopencode.model.vo.EditoraVO;
 import unibaveopencode.util.Messages;
 import unibaveopencode.model.vo.LivroVO;
+import unibaveopencode.util.WindowUtil;
 import unibaveopencode.util.impl.VerificaNumerosImpl;
 
 /**
@@ -62,12 +67,50 @@ public class JIFLivro extends AbstractScreen {
 
             @Override
             public void focusGained(FocusEvent fe) {
-
             }
 
             @Override
             public void focusLost(FocusEvent fe) {
-                jPCadastroLivro.jtfUrl.setText(String.format(URL_DO_REPOSITORIO, jPCadastroLivro.jtfNumTombo.getText()));
+
+                if (!jPCadastroLivro.jtfNumTombo.getText().equals("")) {
+                    
+                    
+//                    JDCarregando carregando = new JDCarregando(null, true);
+//                    principal.addItem(carregando);
+//                    carregando.setVisible(true);
+//                    carregando.setVisible(false);
+//                    new WindowUtil().centralizar(principal.jDesktopPane1, (JDialog) carregando);
+                    jPCadastroLivro.jtfUrl.setText(String.format(URL_DO_REPOSITORIO, jPCadastroLivro.jtfNumTombo.getText()));
+                    EntityManagerFactory emf = null;
+                    try {
+                        emf = Persistence.createEntityManagerFactory("uocPU");
+                        EntityManager em = emf.createEntityManager();
+                        TypedQuery<LivroVO> query = em.createNamedQuery("LivroVO.findNumTombo", LivroVO.class).setParameter("numTombo", Long.parseLong(jPCadastroLivro.jtfNumTombo.getText()));
+                        LivroVO livro = query.getSingleResult();
+                        if (livro != null) {
+                            jPCadastroLivro.jtfAno.setText(String.valueOf(livro.getDesAno()));
+                            jPCadastroLivro.jtfTitulo.setText(livro.getNomTitulo());
+                            autoresConsultados = new LinkedHashSet<>();
+                            autoresConsultados.addAll(livro.getAutor());
+                            jPCadastroLivro.jPtabelaAutor.jTable.setModel(new AutorNomeTableModel(livro.getAutor()));
+                            editoraConsultada = livro.getEditora();
+                            jPCadastroLivro.jtfEditora.setText(livro.getEditora().getNomEditora());
+                            classificacaoConsultada = livro.getClassificacao();
+                            jPCadastroLivro.jtfClassificacao.setText(livro.getClassificacao().getDesClassificacao());
+                            jPCadastroLivro.jtfUrl.setText(livro.getDesUrl());
+                            setAlterar(true);
+                        }
+                    } catch (Exception e) {
+                        Messages.getErrorMessage(Messages.tratarMsg(e.getMessage()));
+                    } finally {
+                        if (emf != null) {
+                            emf.close();
+                        }
+                    }
+
+//                    carregando.setVisible(false);
+//                    carregando.dispose();
+                }
             }
         });
     }

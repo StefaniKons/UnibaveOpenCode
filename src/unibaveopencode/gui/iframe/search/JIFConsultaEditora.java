@@ -36,7 +36,7 @@ public class JIFConsultaEditora extends javax.swing.JInternalFrame {
     private JPEditoraSearch editoraSearch;
     private List<EditoraVO> lista;
     private JIFLivro livro;
-    
+
     private void initListener() {
         new VerificaNumerosItemImpl(editoraSearch.jtfConsulta, editoraSearch.jcbPor, "Código");
     }
@@ -115,7 +115,9 @@ public class JIFConsultaEditora extends javax.swing.JInternalFrame {
             public void actionPerformed(ActionEvent ae) {
                 switch (editoraSearch.jcbPor.getSelectedIndex()) {
                     case 0:
-                        getConsulta(EditoraVO.FIND_COD_EDITORA, "codEditora", Integer.parseInt(editoraSearch.jtfConsulta.getText()));
+                        if (!editoraSearch.jtfConsulta.getText().equals("")) {
+                            getConsulta(EditoraVO.FIND_COD_EDITORA, "codEditora", Integer.parseInt(editoraSearch.jtfConsulta.getText()));
+                        }
                         return;
                     case 1:
                         getConsulta(EditoraVO.FIND_NOME_EDITORA, "nomEditora", editoraSearch.jtfConsulta.getText());

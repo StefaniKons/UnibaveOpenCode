@@ -36,7 +36,7 @@ public class JIFConsultaClassificacao extends javax.swing.JInternalFrame {
     private JPClassificacaoSearch classificacaoSearch;
     private List<ClassificacaoVO> lista;
     private JIFLivro livro;
-    
+
     private void initListener() {
         new VerificaNumerosItemImpl(classificacaoSearch.jtfConsulta, classificacaoSearch.jcbPor, "Código");
     }
@@ -115,7 +115,9 @@ public class JIFConsultaClassificacao extends javax.swing.JInternalFrame {
             public void actionPerformed(ActionEvent ae) {
                 switch (classificacaoSearch.jcbPor.getSelectedIndex()) {
                     case 0:
-                        getConsulta(ClassificacaoVO.FIND_COD_CLASSIFICACAO, "codClassificacao", Integer.parseInt(classificacaoSearch.jtfConsulta.getText()));
+                        if (!classificacaoSearch.jtfConsulta.getText().equals("")) {
+                            getConsulta(ClassificacaoVO.FIND_COD_CLASSIFICACAO, "codClassificacao", Integer.parseInt(classificacaoSearch.jtfConsulta.getText()));
+                        }
                         return;
                     case 1:
                         getConsulta(ClassificacaoVO.FIND_DESCRICAO_CLASSIFICACAO, "desClassificacao", classificacaoSearch.jtfConsulta.getText());

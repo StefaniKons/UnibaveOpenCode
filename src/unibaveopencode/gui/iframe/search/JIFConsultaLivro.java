@@ -44,7 +44,7 @@ public class JIFConsultaLivro extends javax.swing.JInternalFrame {
     private JPLivroSearch livroSearch;
     private JIFImprimeQrCode qrCode;
     private List<LivroVO> lista;
-    
+
     private void initListener() {
         new VerificaNumerosItemImpl(livroSearch.jtfConsulta, livroSearch.jcbPor, "Nº Tombo", "Ano");
     }
@@ -60,7 +60,7 @@ public class JIFConsultaLivro extends javax.swing.JInternalFrame {
         initLivro();
         this.principal = principal;
     }
-    
+
     //Chama a consulta dentro de JIFImprimeQRCode
     public JIFConsultaLivro(JIFImprimeQrCode qrCode) {
         initLivro();
@@ -95,18 +95,17 @@ public class JIFConsultaLivro extends javax.swing.JInternalFrame {
                     Messages.getWarningMessage("consultaVazia");
                     return;
                 }
-                
-               
-                if(qrCode != null){
+
+                if (qrCode != null) {
                     List<QrCodeVO> list = new ArrayList<>();
-                    for(int row: selectedRows){
+                    for (int row : selectedRows) {
                         LivroVO livro = getLivro(row);
                         try {
                             QrCodeVO qrCodeVO = QrCodeVO.builder().
-                                                    nomTitulo(livro.getNomTitulo()).
-                                                    numTombo(livro.getNumTombo()).
-                                                    qrCode(new QrCodeUtil().gerarQRCode(350, 350, livro.getDesUrl())).
-                                                    build();
+                                    nomTitulo(livro.getNomTitulo()).
+                                    numTombo(livro.getNumTombo()).
+                                    qrCode(new QrCodeUtil().gerarQRCode(350, 350, livro.getDesUrl())).
+                                    build();
                             list.add(qrCodeVO);
                         } catch (WriterException ex) {
                             //TODO
@@ -143,7 +142,9 @@ public class JIFConsultaLivro extends javax.swing.JInternalFrame {
             public void actionPerformed(ActionEvent ae) {
                 switch (livroSearch.jcbPor.getSelectedIndex()) {
                     case 0:
-                        getConsulta(LivroVO.FIND_NUM_TOMBO, "numTombo", Long.parseLong(livroSearch.jtfConsulta.getText()));
+                        if (!livroSearch.jtfConsulta.getText().equals("")) {
+                            getConsulta(LivroVO.FIND_NUM_TOMBO, "numTombo", Long.parseLong(livroSearch.jtfConsulta.getText()));
+                        }
                         return;
                     case 1:
                         getConsulta(LivroVO.FIND_NOM_TITULO, "nomTitulo", livroSearch.jtfConsulta.getText());
@@ -155,7 +156,9 @@ public class JIFConsultaLivro extends javax.swing.JInternalFrame {
                         getConsulta(LivroVO.FIND_NOM_EDITORA, "nomEditora", livroSearch.jtfConsulta.getText());
                         return;
                     case 4:
-                        getConsulta(LivroVO.FIND_DES_ANO, "desAno", Integer.parseInt(livroSearch.jtfConsulta.getText()));
+                        if (!livroSearch.jtfConsulta.getText().equals("")) {
+                            getConsulta(LivroVO.FIND_DES_ANO, "desAno", Integer.parseInt(livroSearch.jtfConsulta.getText()));
+                        }
                         return;
                     case 5:
                         getConsulta(LivroVO.FIND_DES_CLASSIFICACAO, "desClassificacao", livroSearch.jtfConsulta.getText());
@@ -221,7 +224,7 @@ public class JIFConsultaLivro extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     public LivroVO getLivro(int row) {
         Long codigo = (Long) livroSearch.jPtabelaConsulta.jTable.getModel().getValueAt(row, 0);
         LivroVO selectedLivro = null;

@@ -40,7 +40,8 @@ public class VerificaNumerosImpl implements KeyListener {
     @Override
     public void keyReleased(KeyEvent ke) {
         boolean isDigit = Character.isDigit(ke.getKeyChar());
-        if (ke.getKeyCode() == KeyEvent.VK_TAB || ke.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (ke.getKeyCode() == KeyEvent.VK_TAB || ke.getKeyCode() == KeyEvent.VK_ENTER || 
+            ke.getKeyCode() == KeyEvent.VK_BACK_SPACE || ke.getKeyCode() == KeyEvent.VK_DELETE) {
             return;
         }
 
