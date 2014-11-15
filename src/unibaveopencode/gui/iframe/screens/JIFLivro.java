@@ -18,9 +18,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
-import javax.swing.JDesktopPane;
-import javax.swing.JDialog;
-import unibaveopencode.gui.iframe.components.load.JDCarregando;
+import unibaveopencode.exceptions.RequiredFieldException;
 import unibaveopencode.gui.iframe.screens.impl.AbstractScreen;
 import unibaveopencode.gui.iframe.search.JIFConsultaAutor;
 import unibaveopencode.gui.iframe.search.JIFConsultaClassificacao;
@@ -55,6 +53,8 @@ public class JIFLivro extends AbstractScreen {
      */
     public JIFLivro(JFPrincipal principal) {
         initComponents();
+        jPCadastroLivro.jtfNumTombo.setName("\"Nº de Tombo\"");
+        jPCadastroLivro.jtfTitulo.setName("\"Título\"");
         this.principal = principal;
         initBotoes();
         initListeners();
@@ -73,13 +73,6 @@ public class JIFLivro extends AbstractScreen {
             public void focusLost(FocusEvent fe) {
 
                 if (!jPCadastroLivro.jtfNumTombo.getText().equals("")) {
-                    
-                    
-//                    JDCarregando carregando = new JDCarregando(null, true);
-//                    principal.addItem(carregando);
-//                    carregando.setVisible(true);
-//                    carregando.setVisible(false);
-//                    new WindowUtil().centralizar(principal.jDesktopPane1, (JDialog) carregando);
                     jPCadastroLivro.jtfUrl.setText(String.format(URL_DO_REPOSITORIO, jPCadastroLivro.jtfNumTombo.getText()));
                     EntityManagerFactory emf = null;
                     try {
@@ -101,15 +94,12 @@ public class JIFLivro extends AbstractScreen {
                             setAlterar(true);
                         }
                     } catch (Exception e) {
-                        Messages.getErrorMessage(Messages.tratarMsg(e.getMessage()));
+                        //Não deverá aparecer erro para o usuário caso perca o foco do campo.
                     } finally {
                         if (emf != null) {
                             emf.close();
                         }
                     }
-
-//                    carregando.setVisible(false);
-//                    carregando.dispose();
                 }
             }
         });
@@ -166,6 +156,12 @@ public class JIFLivro extends AbstractScreen {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
+                try {
+                    WindowUtil.verificaVazio(JIFLivro.this);
+                } catch (RequiredFieldException ex) {
+                    Messages.getErrorMessage(ex.getMessage());
+                    return;
+                }
                 EntityManagerFactory emf = null;
                 EntityManager em = null;
 
@@ -178,7 +174,9 @@ public class JIFLivro extends AbstractScreen {
                     livro.setNomTitulo(jPCadastroLivro.jtfTitulo.getText());
                     livro.setDesAno(Integer.parseInt(jPCadastroLivro.jtfAno.getText()));
                     List<AutorVO> listaAutor = new ArrayList<>();
-                    listaAutor.addAll(autoresConsultados);
+                    if (autoresConsultados != null) {
+                        listaAutor.addAll(autoresConsultados);
+                    }
                     livro.setAutor(listaAutor);
                     livro.setEditora(editoraConsultada);
                     livro.setClassificacao(classificacaoConsultada);

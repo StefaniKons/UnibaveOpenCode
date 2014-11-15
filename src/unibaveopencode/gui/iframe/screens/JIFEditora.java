@@ -11,28 +11,32 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
+import unibaveopencode.exceptions.RequiredFieldException;
 import unibaveopencode.gui.iframe.screens.impl.AbstractScreen;
 import unibaveopencode.gui.iframe.search.JIFConsultaEditora;
 import unibaveopencode.gui.panel.components.buttons.JPBotaoCadastro;
 import unibaveopencode.gui.principal.JFPrincipal;
 import unibaveopencode.util.Messages;
 import unibaveopencode.model.vo.EditoraVO;
+import unibaveopencode.util.WindowUtil;
 
 /**
  *
  * @author Stéfani
  */
-public class JIFEditora extends AbstractScreen{
+public class JIFEditora extends AbstractScreen {
+
     private JFPrincipal principal;
-    
+
     /**
      * Creates new form JIFEditora
      *
      * @param principal
      */
-    
     public JIFEditora(JFPrincipal principal) {
         initComponents();
+        jPCadastroEditora.jtfCodigo.setName("\"Código\"");
+        jPCadastroEditora.jtfNome.setName("\"Editora\"");
         this.principal = principal;
         initBotoes();
     }
@@ -43,6 +47,12 @@ public class JIFEditora extends AbstractScreen{
 
             @Override
             public void actionPerformed(ActionEvent ae) {
+                try {
+                    WindowUtil.verificaVazio(JIFEditora.this, jPCadastroEditora.jtfCodigo.getName());
+                } catch (RequiredFieldException ex) {
+                    Messages.getErrorMessage(ex.getMessage());
+                    return;
+                }
                 EntityManagerFactory emf = null;
                 EntityManager em = null;
 
@@ -73,7 +83,7 @@ public class JIFEditora extends AbstractScreen{
                 }
             }
         });
-        
+
         botoes.jbExcluir.addActionListener(new ActionListener() {
 
             @Override
@@ -121,7 +131,7 @@ public class JIFEditora extends AbstractScreen{
         });
 
         botoes.jbLimpar.addActionListener(getLimparActionListener());
-        
+
         botoes.jbFechar.addActionListener(new ActionListener() {
 
             @Override

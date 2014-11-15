@@ -7,7 +7,6 @@ package unibaveopencode.util;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.KeyListener;
 import javax.swing.JDesktopPane;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -15,6 +14,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.JTextField;
+import unibaveopencode.exceptions.RequiredFieldException;
 import unibaveopencode.gui.panel.components.search.JPSearch;
 import unibaveopencode.gui.panel.components.tables.tablemodel.TableModel;
 
@@ -67,5 +67,31 @@ public class WindowUtil {
             }
         }
 
+    }
+
+    public static void verificaVazio(JInternalFrame jif, String... pularCampos) throws RequiredFieldException {
+        for (java.awt.Component comp : jif.getComponents()) {
+            if (comp instanceof JRootPane) {
+                JPanel jp = (JPanel) ((JRootPane) comp).getContentPane();
+                for (Component comp2 : jp.getComponents()) {
+                    if (comp2 instanceof JPanel) {
+                        for (Component comp3 : ((JPanel) comp2).getComponents()) {
+                            if (comp3 instanceof JTextField) {
+                                if ("".equals(((JTextField) comp3).getText())) {
+                                    for (String nomeDoCampo : pularCampos) {
+                                        if (!nomeDoCampo.equals(((JTextField) comp3).getName())) {
+                                            throw new RequiredFieldException("O campo " + ((JTextField) comp3).getName() + " deve ser preenchido, por favor verifique.");
+                                        }
+                                    }
+                                    if (pularCampos.length == 0) {
+                                        throw new RequiredFieldException("O campo " + ((JTextField) comp3).getName() + " deve ser preenchido, por favor verifique.");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -11,12 +11,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
+import unibaveopencode.exceptions.RequiredFieldException;
 import unibaveopencode.gui.iframe.screens.impl.AbstractScreen;
 import unibaveopencode.gui.iframe.search.JIFConsultaClassificacao;
 import unibaveopencode.gui.panel.components.buttons.JPBotaoCadastro;
 import unibaveopencode.gui.principal.JFPrincipal;
 import unibaveopencode.util.Messages;
 import unibaveopencode.model.vo.ClassificacaoVO;
+import unibaveopencode.util.WindowUtil;
 
 /**
  *
@@ -31,6 +33,8 @@ public class JIFClassificacao extends AbstractScreen {
      */
     public JIFClassificacao(JFPrincipal principal) {
         initComponents();
+        jPCadastroClassificacao.jtfCodigo.setName("\"Código\"");
+        jPCadastroClassificacao.jtfDescricao.setName("\"Descrição\"");
         this.principal = principal;
         initBotoes();
         jPCadastroClassificacao.jtfDescricao.getText();
@@ -42,6 +46,12 @@ public class JIFClassificacao extends AbstractScreen {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
+                try {
+                    WindowUtil.verificaVazio(JIFClassificacao.this, jPCadastroClassificacao.jtfCodigo.getName());
+                } catch (RequiredFieldException ex) {
+                    Messages.getErrorMessage(ex.getMessage());
+                    return;
+                }
                 EntityManagerFactory emf = null;
                 EntityManager em = null;
 
@@ -72,7 +82,7 @@ public class JIFClassificacao extends AbstractScreen {
                 }
             }
         });
-        
+
         botoes.jbExcluir.addActionListener(new ActionListener() {
 
             @Override

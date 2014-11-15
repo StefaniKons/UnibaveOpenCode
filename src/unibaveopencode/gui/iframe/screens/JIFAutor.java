@@ -11,12 +11,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
+import unibaveopencode.exceptions.RequiredFieldException;
 import unibaveopencode.gui.iframe.screens.impl.AbstractScreen;
 import unibaveopencode.gui.iframe.search.JIFConsultaAutor;
 import unibaveopencode.gui.panel.components.buttons.JPBotaoCadastro;
 import unibaveopencode.gui.principal.JFPrincipal;
 import unibaveopencode.util.Messages;
 import unibaveopencode.model.vo.AutorVO;
+import unibaveopencode.util.WindowUtil;
 
 /**
  *
@@ -33,6 +35,8 @@ public class JIFAutor extends AbstractScreen {
      */
     public JIFAutor(JFPrincipal principal) {
         initComponents();
+        jPCadastroAutor.jtfCodigo.setName("\"Código\"");
+        jPCadastroAutor.jtfNome.setName("\"Nome\"");
         this.principal = principal;
         initBotoes();
     }
@@ -43,6 +47,12 @@ public class JIFAutor extends AbstractScreen {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
+                try {
+                    WindowUtil.verificaVazio(JIFAutor.this, jPCadastroAutor.jtfCodigo.getName());
+                } catch (RequiredFieldException ex) {
+                    Messages.getErrorMessage(ex.getMessage());
+                    return;
+                }
                 EntityManagerFactory emf = null;
                 EntityManager em = null;
 
