@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,7 @@ import unibaveopencode.gui.principal.JFPrincipal;
 import unibaveopencode.model.vo.LivroVO;
 import unibaveopencode.model.vo.QrCodeVO;
 import unibaveopencode.report.GerarRelatorio;
+import unibaveopencode.util.Messages;
 import unibaveopencode.util.QrCodeUtil;
 
 /**
@@ -71,6 +73,24 @@ public class JIFImprimeQrCode extends javax.swing.JInternalFrame {
     }
 
     public void initBotoes() {
+        jPImprimeQrCode.jPTabelaQrCode.jbRemoveQrCode.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                int selectedRow = jPImprimeQrCode.jPTabelaQrCode.jTable.getSelectedRow();
+                if (selectedRow == -1) {
+                    Messages.getWarningMessage("excluirVazio", "um QR CODE");
+                    return;
+                }
+                List<QrCodeVO> listaQrCodes = new ArrayList<>();
+                listaQrCodes.addAll(JIFImprimeQrCode.this.qrCodeConsultados);
+                listaQrCodes.remove(selectedRow);
+                JIFImprimeQrCode.this.qrCodeConsultados.clear();
+                JIFImprimeQrCode.this.qrCodeConsultados.addAll(listaQrCodes);
+                jPImprimeQrCode.jPTabelaQrCode.jTable.setModel(new QrCodeTableModel(listaQrCodes));
+            }
+        });
+
         jPImprimeQrCode.jbConsultaLivro.addActionListener(new ActionListener() {
 
             @Override
@@ -161,7 +181,22 @@ public class JIFImprimeQrCode extends javax.swing.JInternalFrame {
     }
 
     public void setQrCodeConsultados(List<QrCodeVO> qrCodeConsultados) {
-        this.qrCodeConsultados = qrCodeConsultados;
-        jPImprimeQrCode.jPTabelaQrCode.jTable.setModel(new QrCodeTableModel(qrCodeConsultados));
+        if (qrCodeConsultados == null) {
+            return;
+        }
+        if (this.qrCodeConsultados == null) {
+            this.qrCodeConsultados = qrCodeConsultados;
+        } else {
+            for (QrCodeVO vo : qrCodeConsultados) {
+                for (QrCodeVO vo1 : this.qrCodeConsultados) {
+                    if (vo1.getNumTombo().equals(vo.getNumTombo())) {
+                        Messages.getErrorMessage("O Nº de tombo \"" + vo.getNumTombo() + "\" já foi adicionado.");
+                        return;
+                    }
+                }
+            }
+            this.qrCodeConsultados.addAll(qrCodeConsultados);
+        }
+        jPImprimeQrCode.jPTabelaQrCode.jTable.setModel(new QrCodeTableModel(this.qrCodeConsultados));
     }
 }
