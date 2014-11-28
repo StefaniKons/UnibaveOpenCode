@@ -65,6 +65,7 @@ public class JPImprimeQrCode extends javax.swing.JPanel {
         jtfTitulo.setEditable(false);
         jtfTitulo.setBackground(java.awt.SystemColor.controlHighlight);
         jtfTitulo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtfTitulo.setForeground(new java.awt.Color(51, 51, 51));
         jtfTitulo.setMaximumSize(new java.awt.Dimension(548, 23));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 28)); // NOI18N
@@ -77,11 +78,13 @@ public class JPImprimeQrCode extends javax.swing.JPanel {
         jtfUrl.setEditable(false);
         jtfUrl.setBackground(java.awt.SystemColor.controlHighlight);
         jtfUrl.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtfUrl.setForeground(new java.awt.Color(51, 51, 51));
         jtfUrl.setMaximumSize(new java.awt.Dimension(548, 23));
 
         jtfNum_tombo.setEditable(false);
         jtfNum_tombo.setBackground(java.awt.SystemColor.controlHighlight);
         jtfNum_tombo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtfNum_tombo.setForeground(new java.awt.Color(51, 51, 51));
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("Nº de Tombo:");
