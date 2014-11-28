@@ -92,6 +92,7 @@ public class JPCadastroLivro extends javax.swing.JPanel {
         jtfUrl.setEditable(false);
         jtfUrl.setBackground(java.awt.SystemColor.controlHighlight);
         jtfUrl.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jtfUrl.setForeground(new java.awt.Color(51, 51, 51));
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel8.setText("URL:");
